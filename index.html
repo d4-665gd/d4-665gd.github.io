@@ -1,3 +1,64 @@
-<html>
-  <h1> h <h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conversor Flotante a Binario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <br> 
+    <br>
+    <br>
+   <center> <span class="badge text-bg-info"> <p class="fs-2"> Conversor de Numeros Flotantes a Binarios por el IEEE 754 </p> </span> </center>
+    <br>
+    <br>
+    <br>
+   <table class="table">
+    <thead>
+      <tr class="table-warning">
+        <th scope="col"></th>
+        <form ></form><th scope="col"> Introduce numero flotante </th> 
+        <th scope="col"><input type="text" id="num"> </th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-danger">
+        <th scope="row"></th>
+        <td> Representacion binaria</td>
+        <td>  <input type="button" value="CONVERSION" onclick="conversion_floats()">  <div id="resultado"> <br> 
+              <p class= "fw-semibold text-decoration-underline" > Valor Binario </p> </div>  </td> </form>
+     </tr>
+      
+    </tbody>
+  </table>
+   
+  <script>
+    function conversion_floats() {
+        let numero = parseFloat(document.getElementById("num").value);
+        if (isNaN(numero)) {
+            document.getElementById("resultado").innerText = " Ingrese un valor numerico.";
+            return;
+        }
+        let binario = conversorB(numero);
+        document.getElementById("resultado").innerText = "Binario IEEE 754: " + binario;
+    }
+
+    function conversorB(numero) {
+        let buffer = new ArrayBuffer(4); // Buffer de 4 bytes (32 bits)
+        let vistaFloat = new Float32Array(buffer); // Interpretar como flotante
+        vistaFloat[0] = numero; // Asignar el número
+        let vistaEntero = new Uint32Array(buffer); // Interpretar como entero sin signo
+        let binario = vistaEntero[0].toString(2).padStart(32, '0'); // Convertir a binario
+        return binario;
+    }
+</script>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>  
+</body>
 </html>
